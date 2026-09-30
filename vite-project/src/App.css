@@ -1,0 +1,274 @@
+@import "tailwindcss";
+
+:root {
+  --black: #050505;
+  --soft-black: #0a0a0a;
+  --gold: #c9a45c;
+  --gold-light: #e0c27a;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--black);
+  color: var(--white);
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+
+.font-serif {
+  font-family: "Cormorant Garamond", serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 500;
+}
+
+/* =========================
+   TEXT SELECTION
+========================= */
+
+::selection {
+  background: var(--gold);
+  color: #050505;
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b3020;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* =========================
+   IMAGE
+========================= */
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* =========================
+   FORM ELEMENTS
+========================= */
+
+input,
+textarea,
+select {
+  color: white;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+select option {
+  background: #0a0a0a;
+  color: white;
+}
+
+/* =========================
+   GOLD UTILITIES
+========================= */
+
+.gold-text {
+  color: var(--gold);
+}
+
+.gold-border {
+  border-color: rgba(201, 164, 92, 0.3);
+}
+
+.gold-glow {
+  box-shadow: 0 0 40px rgba(201, 164, 92, 0.08);
+}
+
+/* =========================
+   PREMIUM BUTTON
+========================= */
+
+.gold-button {
+  background: var(--gold);
+  color: #050505;
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.gold-button:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(201, 164, 92, 0.15);
+}
+
+/* =========================
+   GLASS EFFECT
+========================= */
+
+.glass {
+  background: rgba(5, 5, 5, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* =========================
+   IMAGE OVERLAY
+========================= */
+
+.image-overlay {
+  position: relative;
+}
+
+.image-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.85),
+      rgba(0, 0, 0, 0.15),
+      rgba(0, 0, 0, 0.25)
+    );
+  pointer-events: none;
+}
+
+/* =========================
+   GOLD LINE
+========================= */
+
+.gold-line {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 164, 92, 0.6),
+    transparent
+  );
+}
+
+/* =========================
+   PAGE TRANSITION
+========================= */
+
+.page-fade {
+  animation: pageFade 0.7s ease forwards;
+}
+
+@keyframes pageFade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   FLOATING GOLD EFFECT
+========================= */
+
+.gold-orb {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(201, 164, 92, 0.1) 0%,
+    rgba(201, 164, 92, 0.03) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+}
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
