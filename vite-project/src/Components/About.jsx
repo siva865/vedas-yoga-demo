@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 
 const studioImage =
-  "https://images.unsplash.com/photo-1599447292180-45fd84092ef4?auto=format&fit=crop&w=1600&q=90";
+      "https://images.unsplash.com/photo-1545389336-cf090694435e?auto=format&fit=crop&w=1400&q=90"
 
 const values = [
   {

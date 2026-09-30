@@ -19,36 +19,39 @@ const navItems = [
   { name: "Contact", path: "/contact" },
 ];
 
+/* =========================================================
+   MOBILE MENU ANIMATION
+   Lightweight + smooth
+========================================================= */
+
 const menuVariants = {
   hidden: {
     opacity: 0,
-    scale: 0.96,
-    y: -12,
-    filter: "blur(8px)",
+    y: -15,
   },
 
   visible: {
     opacity: 1,
-    scale: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: {
-      duration: 0.45,
-      ease: [0.22, 1, 0.36, 1],
+      duration: 0.28,
+      ease: "easeOut",
     },
   },
 
   exit: {
     opacity: 0,
-    scale: 0.97,
-    y: -8,
-    filter: "blur(6px)",
+    y: -10,
     transition: {
-      duration: 0.3,
-      ease: [0.4, 0, 1, 1],
+      duration: 0.2,
+      ease: "easeIn",
     },
   },
 };
+
+/* =========================================================
+   BACKDROP ANIMATION
+========================================================= */
 
 const backdropVariants = {
   hidden: {
@@ -58,14 +61,14 @@ const backdropVariants = {
   visible: {
     opacity: 1,
     transition: {
-      duration: 0.35,
+      duration: 0.2,
     },
   },
 
   exit: {
     opacity: 0,
     transition: {
-      duration: 0.25,
+      duration: 0.15,
     },
   },
 };
@@ -74,17 +77,17 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
 
-  /* ============================================
-     CLOSE MOBILE MENU ON ROUTE CHANGE
-  ============================================ */
+  /* =========================================================
+     CLOSE MENU WHEN ROUTE CHANGES
+  ========================================================= */
 
   useEffect(() => {
     setOpen(false);
   }, [location.pathname]);
 
-  /* ============================================
-     LOCK BODY SCROLL WHEN MENU IS OPEN
-  ============================================ */
+  /* =========================================================
+     LOCK BODY SCROLL
+  ========================================================= */
 
   useEffect(() => {
     if (open) {
@@ -98,9 +101,9 @@ export default function Navbar() {
     };
   }, [open]);
 
-  /* ============================================
+  /* =========================================================
      ESC KEY
-  ============================================ */
+  ========================================================= */
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -118,9 +121,9 @@ export default function Navbar() {
 
   return (
     <>
-      {/* =================================================
+      {/* =====================================================
           DESKTOP / MAIN NAVBAR
-      ================================================== */}
+      ====================================================== */}
 
       <motion.nav
         initial={{
@@ -136,7 +139,10 @@ export default function Navbar() {
           ease: [0.22, 1, 0.36, 1],
         }}
         className="
-          fixed left-1/2 top-4 z-50
+          fixed
+          left-1/2
+          top-4
+          z-50
           w-[calc(100%-24px)]
           -translate-x-1/2
           sm:top-5
@@ -146,29 +152,38 @@ export default function Navbar() {
       >
         <div
           className="
-            group relative
-            flex items-center justify-between
+            group
+            relative
+            flex
+            items-center
+            justify-between
             rounded-full
-            border border-[#C9A45C]/25
+            border
+            border-[#C9A45C]/25
             bg-[#050505]/80
-            px-4 py-2.5
+            px-4
+            py-2.5
             backdrop-blur-2xl
-            transition-all duration-500
+            transition-all
+            duration-500
             hover:border-[#C9A45C]/40
             hover:bg-[#050505]/90
-            sm:px-5 sm:py-3
+            sm:px-5
+            sm:py-3
           "
         >
-          {/* Navbar glow */}
+          {/* Navbar Glow */}
 
           <div
             className="
               pointer-events-none
-              absolute inset-0
+              absolute
+              inset-0
               rounded-full
               opacity-0
               shadow-[0_0_40px_rgba(201,164,92,0.08)]
-              transition-opacity duration-500
+              transition-opacity
+              duration-500
               group-hover:opacity-100
             "
           />
@@ -179,7 +194,14 @@ export default function Navbar() {
 
           <Link
             to="/"
-            className="group/logo relative z-10 flex items-center gap-2.5"
+            className="
+              group/logo
+              relative
+              z-10
+              flex
+              items-center
+              gap-2.5
+            "
           >
             <motion.div
               whileHover={{
@@ -190,16 +212,23 @@ export default function Navbar() {
                 ease: [0.22, 1, 0.36, 1],
               }}
               className="
-                flex h-9 w-9 shrink-0
-                items-center justify-center
+                flex
+                h-9
+                w-9
+                shrink-0
+                items-center
+                justify-center
                 rounded-full
-                border border-[#C9A45C]/70
+                border
+                border-[#C9A45C]/70
                 bg-[#C9A45C]/5
                 text-[#C9A45C]
-                transition-all duration-500
+                transition-all
+                duration-500
                 group-hover/logo:bg-[#C9A45C]/10
                 group-hover/logo:shadow-[0_0_25px_rgba(201,164,92,0.15)]
-                sm:h-10 sm:w-10
+                sm:h-10
+                sm:w-10
               "
             >
               <Sparkles size={16} />
@@ -229,14 +258,25 @@ export default function Navbar() {
               DESKTOP NAVIGATION
           ================================================== */}
 
-          <div className="relative z-10 hidden items-center gap-6 md:flex lg:gap-8">
+          <div
+            className="
+              relative
+              z-10
+              hidden
+              items-center
+              gap-6
+              md:flex
+              lg:gap-8
+            "
+          >
             {navItems.map((item) => (
               <NavLink
                 key={item.name}
                 to={item.path}
                 className={({ isActive }) =>
                   `
-                  group/link relative
+                  group/link
+                  relative
                   py-2
                   text-[10px]
                   uppercase
@@ -256,8 +296,6 @@ export default function Navbar() {
                   <>
                     {item.name}
 
-                    {/* Active / hover line */}
-
                     <span
                       className={`
                         absolute
@@ -265,7 +303,8 @@ export default function Navbar() {
                         left-0
                         h-px
                         bg-[#C9A45C]
-                        transition-all duration-300
+                        transition-all
+                        duration-300
                         ${
                           isActive
                             ? "w-full"
@@ -283,18 +322,23 @@ export default function Navbar() {
             <Link
               to="/contact"
               className="
-                group/book relative
-                flex items-center gap-2
+                group/book
+                relative
+                flex
+                items-center
+                gap-2
                 overflow-hidden
                 rounded-full
                 bg-[#C9A45C]
-                px-5 py-2.5
+                px-5
+                py-2.5
                 text-[10px]
                 font-semibold
                 uppercase
                 tracking-[0.15em]
                 text-black
-                transition-all duration-500
+                transition-all
+                duration-500
                 hover:bg-[#E0C27A]
                 hover:shadow-[0_8px_30px_rgba(201,164,92,0.18)]
               "
@@ -306,21 +350,23 @@ export default function Navbar() {
               <ArrowUpRight
                 size={14}
                 className="
-                  relative z-10
-                  transition-transform duration-300
+                  relative
+                  z-10
+                  transition-transform
+                  duration-300
                   group-hover/book:-translate-y-0.5
                   group-hover/book:translate-x-0.5
                 "
               />
 
-              {/* Hover sweep */}
-
               <span
                 className="
-                  absolute inset-0
+                  absolute
+                  inset-0
                   translate-y-full
                   bg-white
-                  transition-transform duration-500
+                  transition-transform
+                  duration-500
                   group-hover/book:translate-y-0
                 "
               />
@@ -339,14 +385,20 @@ export default function Navbar() {
             aria-label="Open menu"
             aria-expanded={open}
             className="
-              relative z-10
-              flex h-10 w-10
-              items-center justify-center
+              relative
+              z-10
+              flex
+              h-10
+              w-10
+              items-center
+              justify-center
               rounded-full
-              border border-[#C9A45C]/35
+              border
+              border-[#C9A45C]/35
               bg-[#C9A45C]/5
               text-[#C9A45C]
-              transition-all duration-300
+              transition-all
+              duration-300
               hover:border-[#C9A45C]/70
               hover:bg-[#C9A45C]/10
               md:hidden
@@ -357,14 +409,16 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
-      {/* =================================================
+      {/* =====================================================
           MOBILE MENU
-      ================================================== */}
+      ====================================================== */}
 
       <AnimatePresence>
         {open && (
           <>
-            {/* BACKDROP */}
+            {/* =================================================
+                BACKDROP
+            ================================================== */}
 
             <motion.div
               variants={backdropVariants}
@@ -373,14 +427,18 @@ export default function Navbar() {
               exit="exit"
               onClick={() => setOpen(false)}
               className="
-                fixed inset-0 z-[90]
+                fixed
+                inset-0
+                z-[90]
                 bg-black/70
                 backdrop-blur-md
                 md:hidden
               "
             />
 
-            {/* MOBILE PANEL */}
+            {/* =================================================
+                MOBILE PANEL
+            ================================================== */}
 
             <motion.div
               variants={menuVariants}
@@ -389,12 +447,15 @@ export default function Navbar() {
               exit="exit"
               className="
                 fixed
-                left-3 right-3
-                top-3 bottom-3
+                left-3
+                right-3
+                top-3
+                bottom-3
                 z-[100]
                 overflow-hidden
                 rounded-[30px]
-                border border-[#C9A45C]/30
+                border
+                border-[#C9A45C]/30
                 bg-[#080909]
                 shadow-[0_30px_100px_rgba(0,0,0,0.7)]
                 md:hidden
@@ -404,20 +465,17 @@ export default function Navbar() {
                   PANEL BACKGROUND EFFECTS
               ================================================== */}
 
-              <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                {/* Green glow */}
+              <div
+                className="
+                  pointer-events-none
+                  absolute
+                  inset-0
+                  overflow-hidden
+                "
+              >
+                {/* Green Glow */}
 
-                <motion.div
-                  animate={{
-                    x: [0, 40, 0],
-                    y: [0, 50, 0],
-                    scale: [1, 1.15, 1],
-                  }}
-                  transition={{
-                    duration: 10,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
+                <div
                   className="
                     absolute
                     -left-32
@@ -430,18 +488,9 @@ export default function Navbar() {
                   "
                 />
 
-                {/* Gold glow */}
+                {/* Gold Glow */}
 
-                <motion.div
-                  animate={{
-                    x: [0, -30, 0],
-                    y: [0, 30, 0],
-                  }}
-                  transition={{
-                    duration: 8,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
+                <div
                   className="
                     absolute
                     -right-32
@@ -454,17 +503,9 @@ export default function Navbar() {
                   "
                 />
 
-                {/* Decorative circle */}
+                {/* Decorative Circle */}
 
-                <motion.div
-                  animate={{
-                    rotate: 360,
-                  }}
-                  transition={{
-                    duration: 25,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
+                <div
                   className="
                     absolute
                     -bottom-28
@@ -483,18 +524,39 @@ export default function Navbar() {
                   PANEL HEADER
               ================================================== */}
 
-              <div className="relative flex items-center justify-between border-b border-white/10 px-6 py-5 sm:px-8 sm:py-6">
+              <div
+                className="
+                  relative
+                  flex
+                  items-center
+                  justify-between
+                  border-b
+                  border-white/10
+                  px-6
+                  py-5
+                  sm:px-8
+                  sm:py-6
+                "
+              >
                 <Link
                   to="/"
                   onClick={() => setOpen(false)}
-                  className="flex items-center gap-3"
+                  className="
+                    flex
+                    items-center
+                    gap-3
+                  "
                 >
                   <div
                     className="
-                      flex h-9 w-9
-                      items-center justify-center
+                      flex
+                      h-9
+                      w-9
+                      items-center
+                      justify-center
                       rounded-full
-                      border border-[#C9A45C]/50
+                      border
+                      border-[#C9A45C]/50
                       bg-[#C9A45C]/5
                     "
                   >
@@ -505,7 +567,7 @@ export default function Navbar() {
                   </div>
 
                   <div className="leading-none">
-                    <p className="font-serif text-xl">
+                    <p className="font-serif text-xl text-white">
                       Vedas
                     </p>
 
@@ -523,7 +585,7 @@ export default function Navbar() {
                   </div>
                 </Link>
 
-                {/* CLOSE */}
+                {/* CLOSE BUTTON */}
 
                 <motion.button
                   whileHover={{
@@ -535,13 +597,18 @@ export default function Navbar() {
                   onClick={() => setOpen(false)}
                   aria-label="Close menu"
                   className="
-                    flex h-10 w-10
-                    items-center justify-center
+                    flex
+                    h-10
+                    w-10
+                    items-center
+                    justify-center
                     rounded-full
-                    border border-[#C9A45C]/35
+                    border
+                    border-[#C9A45C]/35
                     bg-[#C9A45C]/5
                     text-[#C9A45C]
-                    transition-colors duration-300
+                    transition-colors
+                    duration-300
                     hover:bg-[#C9A45C]/10
                   "
                 >
@@ -556,7 +623,8 @@ export default function Navbar() {
               <div
                 className="
                   relative
-                  flex h-[calc(100%-82px)]
+                  flex
+                  h-[calc(100%-82px)]
                   flex-col
                   overflow-y-auto
                   px-6
@@ -572,16 +640,16 @@ export default function Navbar() {
                       key={item.name}
                       initial={{
                         opacity: 0,
-                        x: -25,
+                        x: -15,
                       }}
                       animate={{
                         opacity: 1,
                         x: 0,
                       }}
                       transition={{
-                        delay: 0.15 + index * 0.09,
-                        duration: 0.55,
-                        ease: [0.22, 1, 0.36, 1],
+                        delay: index * 0.04,
+                        duration: 0.3,
+                        ease: "easeOut",
                       }}
                     >
                       <NavLink
@@ -589,8 +657,10 @@ export default function Navbar() {
                         onClick={() => setOpen(false)}
                         className={({ isActive }) =>
                           `
-                          group/mobile relative
-                          flex items-center
+                          group/mobile
+                          relative
+                          flex
+                          items-center
                           justify-between
                           border-b
                           py-5
@@ -606,13 +676,14 @@ export default function Navbar() {
                         {({ isActive }) => (
                           <>
                             <div className="flex items-center gap-4">
-                              {/* Number */}
+                              {/* NUMBER */}
 
                               <span
                                 className={`
                                   text-[9px]
                                   tracking-[0.2em]
-                                  transition-colors duration-300
+                                  transition-colors
+                                  duration-300
                                   ${
                                     isActive
                                       ? "text-[#C9A45C]"
@@ -623,14 +694,15 @@ export default function Navbar() {
                                 0{index + 1}
                               </span>
 
-                              {/* Name */}
+                              {/* NAME */}
 
                               <span
                                 className={`
                                   font-serif
                                   text-4xl
                                   leading-none
-                                  transition-all duration-300
+                                  transition-all
+                                  duration-300
                                   sm:text-5xl
                                   ${
                                     isActive
@@ -643,11 +715,11 @@ export default function Navbar() {
                               </span>
                             </div>
 
-                            {/* Arrow */}
+                            {/* ARROW */}
 
                             <motion.span
                               animate={{
-                                x: isActive ? 0 : -5,
+                                x: isActive ? 0 : -3,
                                 opacity: isActive ? 1 : 0.25,
                               }}
                               whileHover={{
@@ -655,8 +727,11 @@ export default function Navbar() {
                                 opacity: 1,
                               }}
                               className={`
-                                flex h-9 w-9
-                                items-center justify-center
+                                flex
+                                h-9
+                                w-9
+                                items-center
+                                justify-center
                                 rounded-full
                                 border
                                 ${
@@ -669,7 +744,7 @@ export default function Navbar() {
                               <ArrowUpRight size={15} />
                             </motion.span>
 
-                            {/* Active gold line */}
+                            {/* ACTIVE LINE */}
 
                             <span
                               className={`
@@ -678,7 +753,8 @@ export default function Navbar() {
                                 left-0
                                 h-px
                                 bg-[#C9A45C]
-                                transition-all duration-500
+                                transition-all
+                                duration-500
                                 ${
                                   isActive
                                     ? "w-16"
@@ -700,15 +776,16 @@ export default function Navbar() {
                 <motion.div
                   initial={{
                     opacity: 0,
-                    y: 25,
+                    y: 15,
                   }}
                   animate={{
                     opacity: 1,
                     y: 0,
                   }}
                   transition={{
-                    delay: 0.65,
-                    duration: 0.6,
+                    delay: 0.25,
+                    duration: 0.35,
+                    ease: "easeOut",
                   }}
                   className="
                     mt-auto
@@ -721,7 +798,8 @@ export default function Navbar() {
                     className="
                       group/cta
                       relative
-                      flex w-full
+                      flex
+                      w-full
                       items-center
                       justify-center
                       gap-3
@@ -734,7 +812,8 @@ export default function Navbar() {
                       uppercase
                       tracking-[0.22em]
                       text-black
-                      transition-all duration-500
+                      transition-all
+                      duration-500
                       hover:bg-[#E0C27A]
                     "
                   >
@@ -745,25 +824,40 @@ export default function Navbar() {
                     <ArrowUpRight
                       size={16}
                       className="
-                        relative z-10
-                        transition-transform duration-300
+                        relative
+                        z-10
+                        transition-transform
+                        duration-300
                         group-hover/cta:-translate-y-1
                         group-hover/cta:translate-x-1
                       "
                     />
 
+                    {/* CTA Hover Sweep */}
+
                     <span
                       className="
-                        absolute inset-0
+                        absolute
+                        inset-0
                         translate-y-full
                         bg-white
-                        transition-transform duration-500
+                        transition-transform
+                        duration-500
                         group-hover/cta:translate-y-0
                       "
                     />
                   </Link>
 
-                  <p className="mt-4 text-center text-[8px] uppercase tracking-[0.3em] text-white/20">
+                  <p
+                    className="
+                      mt-4
+                      text-center
+                      text-[8px]
+                      uppercase
+                      tracking-[0.3em]
+                      text-white/20
+                    "
+                  >
                     Find your balance · Live with intention
                   </p>
                 </motion.div>
